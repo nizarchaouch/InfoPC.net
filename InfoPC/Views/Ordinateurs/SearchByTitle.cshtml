@@ -1,0 +1,99 @@
+﻿@model IEnumerable<InfoPC.Models.InfoPC.Ordinateur>
+
+@{
+    ViewData["Title"] = "";
+}
+<style>
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.2s ease-in-out;
+    }
+
+        a:hover {
+            border-color: #007bff;
+        }
+
+        a:active {
+            color: #005cbf;
+        }
+
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .table th,
+        .table td {
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: middle;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table th {
+            background-color: #007bff; /* Blue header color */
+            color: #fff; /* White header text color */
+            font-weight: 600;
+        }
+
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f8f9fa; /* Light gray row color */
+        }
+
+        .table tbody tr:hover {
+            background-color: #e2e6ea; /* Gray row color on hover */
+        }
+</style>
+<h1>Search By Title</h1>
+@using (Html.BeginForm())
+{
+    <p>
+        Title: @Html.TextBox("title") 
+        <input type="submit" value="Search" class=" btn btn-primary" />
+    </p>
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prix)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marque)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marque.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
