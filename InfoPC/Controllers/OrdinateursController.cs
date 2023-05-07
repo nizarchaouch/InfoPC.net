@@ -34,8 +34,8 @@ namespace InfoPC.Controllers
         public IActionResult SearchByTitle(string title)
 
         {
-
-            return View(_context.Ordinateurs.Where(m => m.Title.Contains(title)).ToList());
+            var InfoPcDbContext = _context.Ordinateurs.Include(o => o.Marque);
+            return View(InfoPcDbContext.Where(m => m.Title.Contains(title)).ToList());
         }
 
         // GET: Ordinateurs/Details/5

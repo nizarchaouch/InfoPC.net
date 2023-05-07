@@ -18,7 +18,10 @@ namespace InfoPC.Controllers
         {
             return View(_context.Marques.ToList());
         }
+
         
+
+
         // GET: InfoPcControleur/Details/5
         public ActionResult Details(int id)
         {
