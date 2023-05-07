@@ -1,10 +1,39 @@
 ﻿@model IEnumerable<InfoPC.Models.InfoPC.Marque>
 
 @{
-    ViewData["Title"] = "Marque";
+    ViewData["Title"] = "Search";
 }
-
 <style>
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    select {
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
     a {
         color: #007bff;
@@ -50,20 +79,25 @@
             background-color: #e2e6ea; /* Gray row color on hover */
         }
 </style>
-
-<h1>Marque</h1>
-
-<p>
-    <a asp-action="Create">Create New Marque</a>
-</p>
+<h1>Search</h1>
 
 <p>
-    <a asp-action="MarqueAndTheirPc">Marque And Pc</a>
-</p>
-<p>
-    <a asp-action="Search">Search</a>
-</p>
+    <form action="/InfoPc/Search" method="post">
 
+
+        <select name="name">
+            <option value="ALL">ALL</option>
+            @foreach (var item in ViewBag.Name)
+            {
+                <option value=@item> @item</option>
+            }
+        </select>
+        <input type="text" name="nationality" />
+        <button type="submit"> Submit</button>
+
+    </form>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -80,24 +114,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nationality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
+            </td>
+        </tr>
+}
     </tbody>
 </table>

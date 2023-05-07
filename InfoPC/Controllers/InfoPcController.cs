@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InfoPC.Controllers
 {
@@ -20,6 +21,32 @@ namespace InfoPC.Controllers
         }
 
         
+        public IActionResult Search(string name, string nationality)
+        {
+
+            var marques = _context.Marques.ToList();
+            ViewBag.Name = marques.Select(m => m.Name).ToList();
+            ViewBag.Nationality = nationality;
+
+            if (!string.IsNullOrEmpty(name) && name != "All")
+            {
+                marques = marques.Where(m => m.Name == name).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(nationality))
+            {
+                marques = marques.Where(m => m.Nationality.Contains(nationality)).ToList();
+            }
+            if (name == "ALL")
+            {
+                marques = _context.Marques.ToList();
+            }
+            if (name == "ALL" && !string.IsNullOrEmpty(nationality))
+            {
+                marques = marques.Where(m => m.Nationality.Contains(nationality)).ToList();
+            }
+            return View("Search", marques);
+        }
 
 
         // GET: InfoPcControleur/Details/5

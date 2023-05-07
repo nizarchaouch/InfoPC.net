@@ -4,6 +4,16 @@
     ViewData["Title"] = "";
 }
 <style>
+    input[type="submit"] {
+        padding: 7px 15px;
+        font-size: 13px;
+        border-radius: 5px;
+        margin-right: 10px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+    }
 
     a {
         color: #007bff;
@@ -54,7 +64,7 @@
 {
     <p>
         Title: @Html.TextBox("title") 
-        <input type="submit" value="Search" class=" btn btn-primary" />
+        <input type="submit" value="Search"  />
     </p>
 }
 <p>
@@ -89,9 +99,9 @@
                 @Html.DisplayFor(modelItem => item.Marque.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }
